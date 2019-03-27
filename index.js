@@ -1,11 +1,11 @@
-var inquirer = require("inquirer");
+var inquirer = require('inquirer');
 
 // This can be any kind of SystemJS compatible module.
 // We use Commonjs here, but ES6 or AMD would do just
 // fine.
 module.exports = {
   prompter: prompter,
-  formatCommit: formatCommit
+  formatCommit: formatCommit,
 };
 
 // When a user runs `git cz`, prompter will
@@ -30,34 +30,34 @@ function prompter(cz, commit) {
   inquirer
     .prompt([
       {
-        type: "input",
-        name: "message",
-        message: "GitHub commit message (required):\n",
+        type: 'input',
+        name: 'message',
+        message: 'GitHub commit message (required):\n',
         validate: function(input) {
           if (!input) {
-            return "empty commit message";
+            return 'empty commit message';
           } else {
             return true;
           }
-        }
+        },
       },
       {
-        type: "input",
-        name: "issues",
-        message: "Jira Issue ID(s) (required):\n",
+        type: 'input',
+        name: 'issues',
+        message: 'Jira Issue ID(s) (required):\n',
         validate: function(input) {
           if (!input) {
-            return "Must specify issue IDs, otherwise, just use a normal commit message";
+            return 'Must specify issue IDs, otherwise, just use a normal commit message';
           } else {
             return true;
           }
-        }
+        },
       },
       {
-        type: "input",
-        name: "comment",
-        message: "Jira comment (optional):\n"
-      }
+        type: 'input',
+        name: 'comment',
+        message: 'Jira comment (optional):\n',
+      },
     ])
     .then(answers => {
       formatCommit(commit, answers);
@@ -69,8 +69,8 @@ function formatCommit(commit, answers) {
     filter([
       answers.message,
       answers.issues,
-      answers.comment ? "#comment " + answers.comment : undefined
-    ]).join(" ")
+      answers.comment ? '#comment ' + answers.comment : undefined,
+    ]).join(' ')
   );
 }
 
